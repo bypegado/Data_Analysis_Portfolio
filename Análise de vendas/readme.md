@@ -48,6 +48,8 @@ and table_name= 'fatovendas'
 Agora que ja entendemos quais são os tipos de dados, vamos olhar mais atentamente para as varíaveis que não são numéricas.
 
 **Quais são os tipos de Status do cliente disponíveis?**
+SELECT DISTINCT(status)
+FROM dimensional.dimensaocliente;
 
 <img width="239" height="138" alt="Image" src="https://github.com/user-attachments/assets/5861181b-4cca-4fcc-b496-6808bf7a2eb4" />
 
@@ -57,7 +59,7 @@ Agora que ja entendemos quais são os tipos de dados, vamos olhar mais atentamen
 
 Uma vez que exploramos o dados e buscamos entender quais são as informações que temos no nosso banco de dados, podemos analisar as informações para buscar entender o que está acontecendo no banco de dados.
 
-### Vendas gerais
+### Sobre as vendas gerais
 
 **Qual foi o faturamento total da empresa?**
 
@@ -76,3 +78,41 @@ FROM dimensional.Fatovendas
 
 > Resposta: Podemos verificar um número total de vendas igual a 1880
 
+Qual o ticket médio?
+Query: SELECT AVG(valortotal) as Ticket_medio
+FROM dimensional.fatovendas;
+
+<img width="176" height="74" alt="ticketmedio" src="https://github.com/user-attachments/assets/0f22da15-d4cc-46fb-a535-1246683c1536" />
+
+> Resposta: O ticket médio é igual a: 3249.11
+
+### Sobre os produtos
+Quais são os produtos mais vendidos em quantidade?
+
+Query: SELECT produto, COUNT(quantidade) AS quantidade
+FROM dimensional.dimensaoproduto 
+INNER JOIN dimensional.fatovendas
+ON dimensional.dimensaoproduto.chaveproduto=dimensional.fatovendas.chaveproduto
+GROUP BY dimensaoproduto.produto
+order by quantidade desc
+LIMIT 5;
+
+<img width="559" height="194" alt="top5_maisvendidos" src="https://github.com/user-attachments/assets/03d00b13-bff4-4c55-99bb-36d52b3730e7" />
+
+
+<img width="625" height="488" alt="Captura de ecrã 2025-08-29 085111" src="https://github.com/user-attachments/assets/1afc83dc-667d-4fa7-bdb9-dfbb493ac326" />
+
+
+
+Quais produtos geraram o maior valor total de vendas?
+
+Query: SELECT produto, COUNT(valortotal) as Valor_total
+FROM dimensional.dimensaoproduto 
+INNER JOIN dimensional.fatovendas 
+ON dimensional.dimensaoproduto.chaveproduto = dimensional.fatovendas.chaveproduto
+GROUP BY dimensaoproduto.produto
+ORDER BY Valor_total desc
+LIMIT 5;
+
+
+Qual foi o produto mais vendido em cada trimestre/ano?
