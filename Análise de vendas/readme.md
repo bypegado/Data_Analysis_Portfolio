@@ -22,6 +22,7 @@ A arquitectura das tabelas é em estrela aonde o relacionamento das tabelas dime
 <img width="736" height="602" alt="Image" src="https://github.com/user-attachments/assets/9733c3b1-d977-4a1a-8039-ae06817e5147" />
 
 
+
 ## Exploração de dados:
 A primeira fase da análise é entender o que tem na nossa matéria prima. Vamos a exploração de dados:
 
@@ -97,11 +98,13 @@ GROUP BY dimensaoproduto.produto
 order by quantidade desc
 LIMIT 5;
 
+_Data output, PostgreSQL_
+
 <img width="559" height="194" alt="top5_maisvendidos" src="https://github.com/user-attachments/assets/03d00b13-bff4-4c55-99bb-36d52b3730e7" />
 
+_Gráfico de colunas empilhadas, gerado no Power BI_
 
 <img width="625" height="488" alt="Captura de ecrã 2025-08-29 085111" src="https://github.com/user-attachments/assets/1afc83dc-667d-4fa7-bdb9-dfbb493ac326" />
-
 
 
 Quais produtos geraram o maior valor total de vendas?
@@ -114,5 +117,43 @@ GROUP BY dimensaoproduto.produto
 ORDER BY Valor_total desc
 LIMIT 5;
 
+<img width="552" height="157" alt="image" src="https://github.com/user-attachments/assets/d571458a-458f-4b9d-aa11-eb08599d9df6" />
+
+
+
 
 Qual foi o produto mais vendido em cada trimestre/ano?
+WITH vendas AS (
+  SELECT
+    t.Ano,
+    t.Trimestre,
+    p.Produto,
+    SUM(f.Quantidade) AS total_vendido
+  FROM Dimensional.FatoVendas f
+  JOIN Dimensional.DimensaoTempo    t ON t.ChaveTempo    = f.ChaveTempo
+  JOIN Dimensional.DimensaoProduto  p ON p.ChaveProduto  = f.ChaveProduto
+  GROUP BY t.Ano, t.Trimestre, p.Produto
+),
+maximos AS (
+  SELECT Ano, Trimestre, MAX(total_vendido) AS max_vendido
+  FROM vendas
+  GROUP BY Ano, Trimestre
+)
+SELECT v.Ano, v.Trimestre, v.Produto, v.total_vendido
+FROM vendas v
+JOIN maximos m
+  ON m.Ano = v.Ano
+ AND m.Trimestre = v.Trimestre
+ AND v.total_vendido = m.max_vendido
+ORDER BY v.Ano, v.Trimestre, v.Produto;
+
+
+
+
+
+### Sobre os clientes
+SELECT c.cliente, SUM(V.valortotal) as Valor
+FROM dimensional.fatovendas v
+INNER JOIN dimensional.dimensaocliente c ON v.chavecliente=c.chavecliente
+GROUP BY c.cliente
+ORDER BY c.cliente;
