@@ -171,7 +171,7 @@ _Data output, PostgreSQL_
 
 **Quem são os clientes que mais compraram em valor?**
 
-SELECT c.cliente, SUM(V.valortotal) as Valor
+Query: SELECT c.cliente, SUM(V.valortotal) as Valor
 FROM dimensional.fatovendas v
 INNER JOIN dimensional.dimensaocliente c ON v.chavecliente=c.chavecliente
 GROUP BY c.cliente
@@ -189,5 +189,62 @@ _Data output, PostgreSQL_
 
 <img width="248" height="61" alt="image" src="https://github.com/user-attachments/assets/958f2bfa-b9a6-4cce-8d55-1b95eb5798da" />
 
+
+**Qual o perfil de clientes que mais compra?**
+
+Query: SELECT p.status, SUM(V.quantidade) as Volume
+FROM dimensional.fatovendas V
+INNER JOIN dimensional.dimensaocliente p ON p.chavecliente=V.chaveproduto
+GROUP BY p.status
+ORDER BY Volume DESC;
+
+_Data output, PostgreSQL_
+
+<img width="250" height="109" alt="image" src="https://github.com/user-attachments/assets/a595f8cf-494c-4e69-902a-5eb8fb4b0f6c" />
+
+
+**Qual vendedor teve o maior valor de vendas?**
+
+Query: SELECT n.nome, SUM(v.valortotal) as Valor
+FROM dimensional.fatovendas v
+INNER JOIN dimensional.dimensaovendedor n ON n.chavevendedor=v.chavevendedor
+GROUP BY n.nome
+ORDER BY Valor DESC
+LIMIT 1;
+
+_Data output, PostgreSQL_
+
+<img width="264" height="61" alt="image" src="https://github.com/user-attachments/assets/26599a83-d8f5-437b-bcd0-6c25f0041ea3" />
+
+
+
+**Quem vendeu mais unidades?**
+
+Query: SELECT p.nome, SUM(V.quantidade) as Volume
+FROM dimensional.fatovendas V
+INNER JOIN dimensional.dimensaovendedor p ON p.chavevendedor=V.chaveproduto
+GROUP BY p.nome
+ORDER BY Volume DESC
+LIMIT 1;
+
+_Data output, PostgreSQL_
+
+<img width="248" height="58" alt="image" src="https://github.com/user-attachments/assets/f9532805-3ddd-4ab1-b8f8-6c139de26b66" />
+
+
+
+
+**Qual vendedor aplicou mais descontos?**
+
+Query: SELECT n.nome, COUNT(v.desconto) as total_desconto
+FROM dimensional.fatovendas v
+INNER JOIN dimensional.dimensaovendedor n ON n.chavevendedor=v.chavevendedor
+GROUP BY n.nome
+ORDER BY total_desconto DESC
+LIMIT 1;
+
+_Data output, PostgreSQL_
+
+<img width="302" height="58" alt="image" src="https://github.com/user-attachments/assets/945cde66-b308-4ff0-9829-4557970ad456" />
 
 
