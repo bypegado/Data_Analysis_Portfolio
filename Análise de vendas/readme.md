@@ -31,6 +31,8 @@ A primeira fase da análise é entender o que tem na nossa matéria prima. Vamos
 Query: SELECT count(*) as qtd_registros 
 FROM dimensional.fatovendas;
 
+_Data output, PostgreSQL_
+
 <img width="175" height="75" alt="Image" src="https://github.com/user-attachments/assets/6d355753-8bca-4d6a-9247-d69725b4cf2d" />
 
 > Resposta: 1880
@@ -42,6 +44,8 @@ FROM information_schema.columns
 where table_schema= 'dimensional'
 and table_name= 'fatovendas'
 
+_Data output, PostgreSQL_
+
 <img width="273" height="264" alt="Image" src="https://github.com/user-attachments/assets/0d313838-f3f5-47ae-a7db-9eb959007898" />
 
 > Resposta: Podemos verificar que a tabela fatovendas possui tipo de dados: integer e numeric
@@ -51,6 +55,8 @@ Agora que ja entendemos quais são os tipos de dados, vamos olhar mais atentamen
 **Quais são os tipos de Status do cliente disponíveis?**
 SELECT DISTINCT(status)
 FROM dimensional.dimensaocliente;
+
+_Data output, PostgreSQL_
 
 <img width="239" height="138" alt="Image" src="https://github.com/user-attachments/assets/5861181b-4cca-4fcc-b496-6808bf7a2eb4" />
 
@@ -67,13 +73,17 @@ Uma vez que exploramos o dados e buscamos entender quais são as informações q
 Query: SELECT sum(valortotal) as Faturamento_total 
 FROM dimensional.Fatovendas;
 
+_Data output, PostgreSQL_
+
 <img width="207" height="74" alt="Image" src="https://github.com/user-attachments/assets/031525ee-3521-4705-acfb-f3f89e9cae22" />
 
 > Resposta: Podemos verificar um faturamento total superior a 6108325.46
 
-Qual o número total de vendas realizadas?
+**Qual o número total de vendas realizadas?**
 Query: SELECT COUNT(*) as Numerodevendas_total 
-FROM dimensional.Fatovendas
+FROM dimensional.Fatovendas;
+
+_Data output, PostgreSQL_
 
 <img width="244" height="73" alt="Image" src="https://github.com/user-attachments/assets/6e5a1415-f06c-41a9-87b6-71a1bb865466" />
 
@@ -83,12 +93,15 @@ Qual o ticket médio?
 Query: SELECT AVG(valortotal) as Ticket_medio
 FROM dimensional.fatovendas;
 
+_Data output, PostgreSQL_
+
 <img width="176" height="74" alt="ticketmedio" src="https://github.com/user-attachments/assets/0f22da15-d4cc-46fb-a535-1246683c1536" />
 
 > Resposta: O ticket médio é igual a: 3249.11
 
 ### Sobre os produtos
-Quais são os produtos mais vendidos em quantidade?
+
+**Quais são os produtos mais vendidos em quantidade?**
 
 Query: SELECT produto, COUNT(quantidade) AS quantidade
 FROM dimensional.dimensaoproduto 
@@ -107,7 +120,7 @@ _Gráfico de colunas empilhadas, gerado no Power BI_
 <img width="625" height="488" alt="Captura de ecrã 2025-08-29 085111" src="https://github.com/user-attachments/assets/1afc83dc-667d-4fa7-bdb9-dfbb493ac326" />
 
 
-Quais produtos geraram o maior valor total de vendas?
+**Quais produtos geraram o maior valor total de vendas?**
 
 Query: SELECT produto, COUNT(valortotal) as Valor_total
 FROM dimensional.dimensaoproduto 
@@ -117,13 +130,14 @@ GROUP BY dimensaoproduto.produto
 ORDER BY Valor_total desc
 LIMIT 5;
 
+_Data output, PostgreSQL_
+
 <img width="552" height="157" alt="image" src="https://github.com/user-attachments/assets/d571458a-458f-4b9d-aa11-eb08599d9df6" />
 
 
+**Qual foi o produto mais vendido em cada trimestre/ano?**
 
-
-Qual foi o produto mais vendido em cada trimestre/ano?
-WITH vendas AS (
+Query: WITH vendas AS (
   SELECT
     t.Ano,
     t.Trimestre,
@@ -147,13 +161,33 @@ JOIN maximos m
  AND v.total_vendido = m.max_vendido
 ORDER BY v.Ano, v.Trimestre, v.Produto;
 
+_Data output, PostgreSQL_
 
+<img width="556" height="161" alt="image" src="https://github.com/user-attachments/assets/95e64128-ddf2-465d-9a17-87858d432f94" />
 
 
 
 ### Sobre os clientes
+
+**Quem são os clientes que mais compraram em valor?**
+
 SELECT c.cliente, SUM(V.valortotal) as Valor
 FROM dimensional.fatovendas v
 INNER JOIN dimensional.dimensaocliente c ON v.chavecliente=c.chavecliente
 GROUP BY c.cliente
 ORDER BY c.cliente;
+
+**Qual a província/estado com maior volume de vendas?**
+
+Query: SELECT p.estado, SUM(V.quantidade) as Volume
+FROM dimensional.fatovendas V
+INNER JOIN dimensional.dimensaocliente p ON p.chavecliente=V.chaveproduto
+GROUP BY p.estado
+LIMIT 1;
+
+_Data output, PostgreSQL_
+
+<img width="248" height="61" alt="image" src="https://github.com/user-attachments/assets/958f2bfa-b9a6-4cce-8d55-1b95eb5798da" />
+
+
+
