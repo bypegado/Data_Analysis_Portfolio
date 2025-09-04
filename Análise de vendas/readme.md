@@ -217,7 +217,6 @@ _Data output, PostgreSQL_
 <img width="264" height="61" alt="image" src="https://github.com/user-attachments/assets/26599a83-d8f5-437b-bcd0-6c25f0041ea3" />
 
 
-
 **Quem vendeu mais unidades?**
 
 Query: SELECT p.nome, SUM(V.quantidade) as Volume
@@ -230,8 +229,6 @@ LIMIT 1;
 _Data output, PostgreSQL_
 
 <img width="248" height="58" alt="image" src="https://github.com/user-attachments/assets/f9532805-3ddd-4ab1-b8f8-6c139de26b66" />
-
-
 
 
 **Qual vendedor aplicou mais descontos?**
