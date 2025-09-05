@@ -62,6 +62,7 @@ Query: `SELECT DISTINCT(status)
 FROM dimensional.dimensaocliente;`
 
 _Resultado_
+
 <img width="239" height="138" alt="484003408-5861181b-4cca-4fcc-b496-6808bf7a2eb4" src="https://github.com/user-attachments/assets/694145ea-f29e-4737-a369-33c13e11b653" />
 
 > Resposta: É possível verificar que os dados contam com 3 status ou categorias de clientes.
@@ -79,7 +80,8 @@ FROM dimensional.Fatovendas;`
 
 _Resultado_
 
-<img width="207" height="74" alt="Image" src="https://github.com/user-attachments/assets/031525ee-3521-4705-acfb-f3f89e9cae22" />
+<img width="207" height="74" alt="484003652-031525ee-3521-4705-acfb-f3f89e9cae22" src="https://github.com/user-attachments/assets/9df785d3-d204-449e-8f07-9ee7953f976b" />
+
 
 > Resposta: Podemos verificar um faturamento total superior a 6108325.46
 
@@ -101,7 +103,7 @@ FROM dimensional.fatovendas;`
 
 _Resultado_
 
-<img width="176" height="74" alt="ticketmedio" src="https://github.com/user-attachments/assets/0f22da15-d4cc-46fb-a535-1246683c1536" />
+<img width="244" height="73" alt="484003701-6e5a1415-f06c-41a9-87b6-71a1bb865466" src="https://github.com/user-attachments/assets/221db41a-94c2-4386-89ca-18311f3b976b" />
 
 > Resposta: O ticket médio é igual a: 3249.11
 
