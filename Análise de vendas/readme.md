@@ -245,3 +245,42 @@ _Data output, PostgreSQL_
 <img width="302" height="58" alt="image" src="https://github.com/user-attachments/assets/945cde66-b308-4ff0-9829-4557970ad456" />
 
 
+
+
+**Qual o mês e o trimestre com maior faturamento?**
+
+Query: WITH maior AS(
+SELECT m.mes, m.trimestre, SUM(v.valortotal) as faturamento
+FROM dimensional.fatovendas v
+INNER JOIN dimensional.dimensaotempo m ON m.chavetempo=v.chavetempo
+GROUP BY m.mes, m.trimestre
+), 
+maximos AS(
+SELECT mes, trimestre, MAX(faturamento) as Maior_faturamento
+FROM maior
+GROUP BY mes,trimestre
+)
+SELECT m.mes, m.trimestre, m.faturamento
+FROM maior m
+INNER JOIN maximos t ON m.mes=t.mes AND m.trimestre=t.trimestre AND m.faturamento=t.Maior_faturamento
+order by m.mes, m.trimestre;
+
+_Data output, PostgreSQL_
+
+<img width="285" height="332" alt="image" src="https://github.com/user-attachments/assets/4a8377f7-2e33-460b-a532-995e12a60e14" />
+
+
+**Como se comportam as vendas por dia da semana?**
+
+
+Query: SELECT t.DiaSemana, SUM(f.ValorTotal) AS TotalVendas
+FROM Dimensional.FatoVendas f
+JOIN Dimensional.DimensaoTempo t ON f.ChaveTempo = t.ChaveTempo
+GROUP BY t.DiaSemana
+ORDER BY t.Diasemana;
+
+_Data output, PostgreSQL_
+
+<img width="225" height="209" alt="image" src="https://github.com/user-attachments/assets/8690cedc-b8fa-4a6f-9ee8-787551763570" />
+
+
