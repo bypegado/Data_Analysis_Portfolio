@@ -1,4 +1,4 @@
-# **Projeto: Gerenciamento de Vendas com Data Warehouse e Dashboards**
+# **Projeto: Análise de Vendas com Data Warehouse e Dashboards**
 
 Este projecto tem como objectivo realizar a modelagem e análise de um Data Warehouse de Vendas utilizando o modelo estrela (Star Schema).
 Foram criadas tabelas dimensão (Cliente, Produto, Vendedor, Tempo) e uma tabela fato (Vendas) para suportar consultas de negócio e análises estratégicas.
