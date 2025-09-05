@@ -35,11 +35,10 @@ A primeira fase da análise é entender o que tem na nossa matéria prima. Vamos
 Query: `SELECT count(*) as qtd_registros 
 FROM dimensional.fatovendas;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="175" height="75" alt="Image" src="https://github.com/user-attachments/assets/6d355753-8bca-4d6a-9247-d69725b4cf2d" />
 
-> Resposta: 1880
 
 **Quais são os tipos de dados?**
 
@@ -48,11 +47,9 @@ FROM information_schema.columns
 where table_schema= 'dimensional'
 and table_name= 'fatovendas';`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="273" height="264" alt="Image" src="https://github.com/user-attachments/assets/0d313838-f3f5-47ae-a7db-9eb959007898" />
-
-> Resposta: Podemos verificar que a tabela fatovendas possui tipo de dados: integer e numeric
 
 Agora que ja entendemos quais são os tipos de dados, vamos olhar mais atentamente para as varíaveis que não são numéricas.
 
@@ -61,7 +58,7 @@ Agora que ja entendemos quais são os tipos de dados, vamos olhar mais atentamen
 Query: `SELECT DISTINCT(status)
 FROM dimensional.dimensaocliente;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="239" height="138" alt="Image" src="https://github.com/user-attachments/assets/5861181b-4cca-4fcc-b496-6808bf7a2eb4" />
 
@@ -78,7 +75,7 @@ Uma vez que exploramos o dados e buscamos entender quais são as informações q
 Query: `SELECT sum(valortotal) as Faturamento_total 
 FROM dimensional.Fatovendas;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="207" height="74" alt="Image" src="https://github.com/user-attachments/assets/031525ee-3521-4705-acfb-f3f89e9cae22" />
 
@@ -89,7 +86,7 @@ _Data output, PostgreSQL_
 Query: `SELECT COUNT(*) as Numerodevendas_total 
 FROM dimensional.Fatovendas;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="244" height="73" alt="Image" src="https://github.com/user-attachments/assets/6e5a1415-f06c-41a9-87b6-71a1bb865466" />
 
@@ -100,7 +97,7 @@ Qual o ticket médio?
 Query: `SELECT AVG(valortotal) as Ticket_medio
 FROM dimensional.fatovendas;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="176" height="74" alt="ticketmedio" src="https://github.com/user-attachments/assets/0f22da15-d4cc-46fb-a535-1246683c1536" />
 
@@ -118,7 +115,7 @@ GROUP BY dimensaoproduto.produto
 order by quantidade desc
 LIMIT 5;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="559" height="194" alt="top5_maisvendidos" src="https://github.com/user-attachments/assets/03d00b13-bff4-4c55-99bb-36d52b3730e7" />
 
@@ -137,7 +134,7 @@ GROUP BY dimensaoproduto.produto
 ORDER BY Valor_total desc
 LIMIT 5;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="552" height="157" alt="image" src="https://github.com/user-attachments/assets/d571458a-458f-4b9d-aa11-eb08599d9df6" />
 
@@ -168,7 +165,7 @@ JOIN maximos m
  AND v.total_vendido = m.max_vendido
 ORDER BY v.Ano, v.Trimestre, v.Produto;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="556" height="161" alt="image" src="https://github.com/user-attachments/assets/95e64128-ddf2-465d-9a17-87858d432f94" />
 
@@ -191,7 +188,7 @@ INNER JOIN dimensional.dimensaocliente p ON p.chavecliente=V.chaveproduto
 GROUP BY p.estado
 LIMIT 1;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="248" height="61" alt="image" src="https://github.com/user-attachments/assets/958f2bfa-b9a6-4cce-8d55-1b95eb5798da" />
 
@@ -204,7 +201,7 @@ INNER JOIN dimensional.dimensaocliente p ON p.chavecliente=V.chaveproduto
 GROUP BY p.status
 ORDER BY Volume DESC;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="250" height="109" alt="image" src="https://github.com/user-attachments/assets/a595f8cf-494c-4e69-902a-5eb8fb4b0f6c" />
 
@@ -218,7 +215,7 @@ GROUP BY n.nome
 ORDER BY Valor DESC
 LIMIT 1;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="264" height="61" alt="image" src="https://github.com/user-attachments/assets/26599a83-d8f5-437b-bcd0-6c25f0041ea3" />
 
@@ -232,7 +229,7 @@ GROUP BY p.nome
 ORDER BY Volume DESC
 LIMIT 1;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="248" height="58" alt="image" src="https://github.com/user-attachments/assets/f9532805-3ddd-4ab1-b8f8-6c139de26b66" />
 
@@ -246,7 +243,7 @@ GROUP BY n.nome
 ORDER BY total_desconto DESC
 LIMIT 1;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="302" height="58" alt="image" src="https://github.com/user-attachments/assets/945cde66-b308-4ff0-9829-4557970ad456" />
 
@@ -271,7 +268,7 @@ GROUP BY t.Ano, t.Mes
 ORDER BY Faturamento DESC
 LIMIT 1;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="285" height="332" alt="image" src="https://github.com/user-attachments/assets/4a8377f7-2e33-460b-a532-995e12a60e14" />
 
@@ -288,7 +285,7 @@ GROUP BY t.Ano, t.Trimestre
 ORDER BY Faturamento DESC
 LIMIT 1;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="285" height="58" alt="image" src="https://github.com/user-attachments/assets/4c881fb8-2533-4659-b183-b803154f55d0" />
 
@@ -309,9 +306,20 @@ JOIN Dimensional.DimensaoTempo t ON f.ChaveTempo = t.ChaveTempo
 GROUP BY t.DiaSemana
 ORDER BY t.Diasemana;`
 
-_Data output, PostgreSQL_
+_Resultado_
 
 <img width="237" height="216" alt="image" src="https://github.com/user-attachments/assets/50b5d371-e721-4b9a-b06f-224af8a992ac" />
+
+
+## Conclusão
+
+Este projeto demonstrou como a modelagem dimensional (Star Schema) e a integração entre SQL, PostgreSQL e Power BI podem transformar dados brutos em informações estratégicas para o negócio. 
+
+A partir da criação das tabelas fato e dimensão, foi possível realizar análises que responderam a questões críticas, como identificar os produtos mais vendidos, os clientes mais valiosos, os períodos de maior faturamento e o desempenho dos vendedores. 
+
+Além disso, os dashboards em Power BI proporcionaram uma visão visual e interativa que facilita a tomada de decisões gerenciais.
+
+Com isso, o projeto não só valida a importância do Data Warehouse no suporte à inteligência de negócios, mas também reforça a aplicabilidade prática de ferramentas de análise de dados no contexto empresarial.
 
 
 
