@@ -32,8 +32,8 @@ A primeira fase da análise é entender o que tem na nossa matéria prima. Vamos
 
 **Qual a quantidade de registros de vendas temos na nossa base de dados?**
 
-Query: SELECT count(*) as qtd_registros 
-FROM dimensional.fatovendas;
+Query: `SELECT count(*) as qtd_registros 
+FROM dimensional.fatovendas;`
 
 _Data output, PostgreSQL_
 
@@ -43,10 +43,10 @@ _Data output, PostgreSQL_
 
 **Quais são os tipos de dados?**
 
-Query: SELECT column_name, data_type
+Query: `SELECT column_name, data_type
 FROM information_schema.columns
 where table_schema= 'dimensional'
-and table_name= 'fatovendas'
+and table_name= 'fatovendas';`
 
 _Data output, PostgreSQL_
 
@@ -57,8 +57,9 @@ _Data output, PostgreSQL_
 Agora que ja entendemos quais são os tipos de dados, vamos olhar mais atentamente para as varíaveis que não são numéricas.
 
 **Quais são os tipos de Status do cliente disponíveis?**
-SELECT DISTINCT(status)
-FROM dimensional.dimensaocliente;
+
+Query: `SELECT DISTINCT(status)
+FROM dimensional.dimensaocliente;`
 
 _Data output, PostgreSQL_
 
@@ -74,8 +75,8 @@ Uma vez que exploramos o dados e buscamos entender quais são as informações q
 
 **Qual foi o faturamento total da empresa?**
 
-Query: SELECT sum(valortotal) as Faturamento_total 
-FROM dimensional.Fatovendas;
+Query: `SELECT sum(valortotal) as Faturamento_total 
+FROM dimensional.Fatovendas;`
 
 _Data output, PostgreSQL_
 
@@ -84,8 +85,9 @@ _Data output, PostgreSQL_
 > Resposta: Podemos verificar um faturamento total superior a 6108325.46
 
 **Qual o número total de vendas realizadas?**
-Query: SELECT COUNT(*) as Numerodevendas_total 
-FROM dimensional.Fatovendas;
+
+Query: `SELECT COUNT(*) as Numerodevendas_total 
+FROM dimensional.Fatovendas;`
 
 _Data output, PostgreSQL_
 
@@ -94,8 +96,9 @@ _Data output, PostgreSQL_
 > Resposta: Podemos verificar um número total de vendas igual a 1880
 
 Qual o ticket médio?
-Query: SELECT AVG(valortotal) as Ticket_medio
-FROM dimensional.fatovendas;
+
+Query: `SELECT AVG(valortotal) as Ticket_medio
+FROM dimensional.fatovendas;`
 
 _Data output, PostgreSQL_
 
@@ -107,13 +110,13 @@ _Data output, PostgreSQL_
 
 **Quais são os produtos mais vendidos em quantidade?**
 
-Query: SELECT produto, COUNT(quantidade) AS quantidade
+Query: `SELECT produto, COUNT(quantidade) AS quantidade
 FROM dimensional.dimensaoproduto 
 INNER JOIN dimensional.fatovendas
 ON dimensional.dimensaoproduto.chaveproduto=dimensional.fatovendas.chaveproduto
 GROUP BY dimensaoproduto.produto
 order by quantidade desc
-LIMIT 5;
+LIMIT 5;`
 
 _Data output, PostgreSQL_
 
@@ -126,13 +129,13 @@ _Gráfico de colunas empilhadas, gerado no Power BI_
 
 **Quais produtos geraram o maior valor total de vendas?**
 
-Query: SELECT produto, COUNT(valortotal) as Valor_total
+Query: `SELECT produto, COUNT(valortotal) as Valor_total
 FROM dimensional.dimensaoproduto 
 INNER JOIN dimensional.fatovendas 
 ON dimensional.dimensaoproduto.chaveproduto = dimensional.fatovendas.chaveproduto
 GROUP BY dimensaoproduto.produto
 ORDER BY Valor_total desc
-LIMIT 5;
+LIMIT 5;`
 
 _Data output, PostgreSQL_
 
@@ -141,7 +144,7 @@ _Data output, PostgreSQL_
 
 **Qual foi o produto mais vendido em cada trimestre/ano?**
 
-Query: WITH vendas AS (
+Query: `WITH vendas AS (
   SELECT
     t.Ano,
     t.Trimestre,
@@ -163,31 +166,30 @@ JOIN maximos m
   ON m.Ano = v.Ano
  AND m.Trimestre = v.Trimestre
  AND v.total_vendido = m.max_vendido
-ORDER BY v.Ano, v.Trimestre, v.Produto;
+ORDER BY v.Ano, v.Trimestre, v.Produto;`
 
 _Data output, PostgreSQL_
 
 <img width="556" height="161" alt="image" src="https://github.com/user-attachments/assets/95e64128-ddf2-465d-9a17-87858d432f94" />
 
 
-
 ### Sobre os clientes
 
 **Quem são os clientes que mais compraram em valor?**
 
-Query: SELECT c.cliente, SUM(V.valortotal) as Valor
+Query: `SELECT c.cliente, SUM(V.valortotal) as Valor
 FROM dimensional.fatovendas v
 INNER JOIN dimensional.dimensaocliente c ON v.chavecliente=c.chavecliente
 GROUP BY c.cliente
-ORDER BY c.cliente;
+ORDER BY c.cliente;`
 
 **Qual a província/estado com maior volume de vendas?**
 
-Query: SELECT p.estado, SUM(V.quantidade) as Volume
+Query: `SELECT p.estado, SUM(V.quantidade) as Volume
 FROM dimensional.fatovendas V
 INNER JOIN dimensional.dimensaocliente p ON p.chavecliente=V.chaveproduto
 GROUP BY p.estado
-LIMIT 1;
+LIMIT 1;`
 
 _Data output, PostgreSQL_
 
@@ -196,11 +198,11 @@ _Data output, PostgreSQL_
 
 **Qual o perfil de clientes que mais compra?**
 
-Query: SELECT p.status, SUM(V.quantidade) as Volume
+Query: `SELECT p.status, SUM(V.quantidade) as Volume
 FROM dimensional.fatovendas V
 INNER JOIN dimensional.dimensaocliente p ON p.chavecliente=V.chaveproduto
 GROUP BY p.status
-ORDER BY Volume DESC;
+ORDER BY Volume DESC;`
 
 _Data output, PostgreSQL_
 
@@ -209,12 +211,12 @@ _Data output, PostgreSQL_
 
 **Qual vendedor teve o maior valor de vendas?**
 
-Query: SELECT n.nome, SUM(v.valortotal) as Valor
+Query: `SELECT n.nome, SUM(v.valortotal) as Valor
 FROM dimensional.fatovendas v
 INNER JOIN dimensional.dimensaovendedor n ON n.chavevendedor=v.chavevendedor
 GROUP BY n.nome
 ORDER BY Valor DESC
-LIMIT 1;
+LIMIT 1;`
 
 _Data output, PostgreSQL_
 
@@ -223,12 +225,12 @@ _Data output, PostgreSQL_
 
 **Quem vendeu mais unidades?**
 
-Query: SELECT p.nome, SUM(V.quantidade) as Volume
+Query: `SELECT p.nome, SUM(V.quantidade) as Volume
 FROM dimensional.fatovendas V
 INNER JOIN dimensional.dimensaovendedor p ON p.chavevendedor=V.chaveproduto
 GROUP BY p.nome
 ORDER BY Volume DESC
-LIMIT 1;
+LIMIT 1;`
 
 _Data output, PostgreSQL_
 
@@ -237,12 +239,12 @@ _Data output, PostgreSQL_
 
 **Qual vendedor aplicou mais descontos?**
 
-Query: SELECT n.nome, COUNT(v.desconto) as total_desconto
+Query: `SELECT n.nome, COUNT(v.desconto) as total_desconto
 FROM dimensional.fatovendas v
 INNER JOIN dimensional.dimensaovendedor n ON n.chavevendedor=v.chavevendedor
 GROUP BY n.nome
 ORDER BY total_desconto DESC
-LIMIT 1;
+LIMIT 1;`
 
 _Data output, PostgreSQL_
 
@@ -258,7 +260,7 @@ _Data output, PostgreSQL_
 
 >Mês e ano com maior faturamento
 
-Query: SELECT 
+Query: `SELECT 
     t.Ano,
     t.Mes,
     SUM(f.ValorTotal) AS Faturamento
@@ -267,7 +269,7 @@ JOIN Dimensional.DimensaoTempo t
     ON f.ChaveTempo = t.ChaveTempo
 GROUP BY t.Ano, t.Mes
 ORDER BY Faturamento DESC
-LIMIT 1;
+LIMIT 1;`
 
 _Data output, PostgreSQL_
 
@@ -275,7 +277,7 @@ _Data output, PostgreSQL_
 
 >Trimestre e ano com maior faturamento
 
-Query: SELECT 
+Query: `SELECT 
     t.Ano,
     t.Trimestre,
     SUM(f.ValorTotal) AS Faturamento
@@ -284,7 +286,7 @@ JOIN Dimensional.DimensaoTempo t
     ON f.ChaveTempo = t.ChaveTempo
 GROUP BY t.Ano, t.Trimestre
 ORDER BY Faturamento DESC
-LIMIT 1;
+LIMIT 1;`
 
 _Data output, PostgreSQL_
 
@@ -292,7 +294,7 @@ _Data output, PostgreSQL_
 
 **Como se comportam as vendas por dia da semana?**
 
-Query: SELECT CASE
+Query: `SELECT CASE
 WHEN t.DiaSemana=  0 THEN 'Domingo'
 WHEN t.DiaSemana = 1 THEN 'Segunda-Feira'
 WHEN t.DiaSemana =2 THEN 'Terça-Feira'
@@ -305,7 +307,7 @@ end as Dianasemana
 FROM Dimensional.FatoVendas f
 JOIN Dimensional.DimensaoTempo t ON f.ChaveTempo = t.ChaveTempo
 GROUP BY t.DiaSemana
-ORDER BY t.Diasemana ;
+ORDER BY t.Diasemana;`
 
 _Data output, PostgreSQL_
 
