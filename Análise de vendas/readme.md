@@ -38,7 +38,8 @@ FROM dimensional.fatovendas;`
 
 _Resultado_
 
-<img width="175" height="75" alt="Image" src="https://github.com/user-attachments/assets/6d355753-8bca-4d6a-9247-d69725b4cf2d" />
+<img width="175" height="75" alt="484003089-6d355753-8bca-4d6a-9247-d69725b4cf2d" src="https://github.com/user-attachments/assets/6758e232-3b7e-42f6-a372-e8f6fdc6005a" />
+
 
 
 **Quais são os tipos de dados?**
@@ -50,7 +51,8 @@ and table_name= 'fatovendas';`
 
 _Resultado_
 
-<img width="273" height="264" alt="Image" src="https://github.com/user-attachments/assets/0d313838-f3f5-47ae-a7db-9eb959007898" />
+<img width="273" height="264" alt="484003231-0d313838-f3f5-47ae-a7db-9eb959007898" src="https://github.com/user-attachments/assets/78e2030a-4c8f-45f7-b287-944f1caefb38" />
+
 
 Agora que ja entendemos quais são os tipos de dados, vamos olhar mais atentamente para as varíaveis que não são numéricas.
 
@@ -60,8 +62,7 @@ Query: `SELECT DISTINCT(status)
 FROM dimensional.dimensaocliente;`
 
 _Resultado_
-
-<img width="239" height="138" alt="Image" src="https://github.com/user-attachments/assets/5861181b-4cca-4fcc-b496-6808bf7a2eb4" />
+<img width="239" height="138" alt="484003408-5861181b-4cca-4fcc-b496-6808bf7a2eb4" src="https://github.com/user-attachments/assets/694145ea-f29e-4737-a369-33c13e11b653" />
 
 > Resposta: É possível verificar que os dados contam com 3 status ou categorias de clientes.
 
