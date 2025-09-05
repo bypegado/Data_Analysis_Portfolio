@@ -40,8 +40,6 @@ _Resultado_
 
 <img width="175" height="75" alt="484003089-6d355753-8bca-4d6a-9247-d69725b4cf2d" src="https://github.com/user-attachments/assets/6758e232-3b7e-42f6-a372-e8f6fdc6005a" />
 
-
-
 **Quais são os tipos de dados?**
 
 Query: `SELECT column_name, data_type
@@ -92,7 +90,8 @@ FROM dimensional.Fatovendas;`
 
 _Resultado_
 
-<img width="244" height="73" alt="Image" src="https://github.com/user-attachments/assets/6e5a1415-f06c-41a9-87b6-71a1bb865466" />
+<img width="244" height="73" alt="484003701-6e5a1415-f06c-41a9-87b6-71a1bb865466" src="https://github.com/user-attachments/assets/da812b76-a3e3-4632-a03c-5895410ea569" />
+
 
 > Resposta: Podemos verificar um número total de vendas igual a 1880
 
