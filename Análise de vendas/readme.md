@@ -12,9 +12,13 @@ Power BI – dashboards e relatórios interativos
 📂 Estrutura do Dataset:
 
 Dimensão Cliente → informações de clientes (nome, estado, sexo, status)
+
 Dimensão Produto → catálogo de produtos vendidos
+
 Dimensão Vendedor → responsáveis pelas vendas
+
 Dimensão Tempo → datas, dias da semana, meses, anos, trimestres
+
 Fato Vendas → registros de vendas com quantidade, valores e descontos
 
 A arquitectura das tabelas é em estrela aonde o relacionamento das tabelas dimensões com a tabela fato é do tipo 1:N em termos de cardinalidade, a seguir podemos visualizar o diagrama:
@@ -244,34 +248,49 @@ _Data output, PostgreSQL_
 
 <img width="302" height="58" alt="image" src="https://github.com/user-attachments/assets/945cde66-b308-4ff0-9829-4557970ad456" />
 
-
+### Sobre o tempo
 
 
 **Qual o mês e o trimestre com maior faturamento?**
 
-Query: WITH maior AS(
-SELECT m.mes, m.trimestre, SUM(v.valortotal) as faturamento
-FROM dimensional.fatovendas v
-INNER JOIN dimensional.dimensaotempo m ON m.chavetempo=v.chavetempo
-GROUP BY m.mes, m.trimestre
-), 
-maximos AS(
-SELECT mes, trimestre, MAX(faturamento) as Maior_faturamento
-FROM maior
-GROUP BY mes,trimestre
-)
-SELECT m.mes, m.trimestre, m.faturamento
-FROM maior m
-INNER JOIN maximos t ON m.mes=t.mes AND m.trimestre=t.trimestre AND m.faturamento=t.Maior_faturamento
-order by m.mes, m.trimestre;
+<img width="274" height="63" alt="image" src="https://github.com/user-attachments/assets/85d7e9d8-daa9-4218-b7d9-b439106075f8" />
+
+
+>Mês e ano com maior faturamento
+
+Query: SELECT 
+    t.Ano,
+    t.Mes,
+    SUM(f.ValorTotal) AS Faturamento
+FROM Dimensional.FatoVendas f
+JOIN Dimensional.DimensaoTempo t 
+    ON f.ChaveTempo = t.ChaveTempo
+GROUP BY t.Ano, t.Mes
+ORDER BY Faturamento DESC
+LIMIT 1;
 
 _Data output, PostgreSQL_
 
 <img width="285" height="332" alt="image" src="https://github.com/user-attachments/assets/4a8377f7-2e33-460b-a532-995e12a60e14" />
 
+>Trimestre e ano com maior faturamento
+
+Query: SELECT 
+    t.Ano,
+    t.Trimestre,
+    SUM(f.ValorTotal) AS Faturamento
+FROM Dimensional.FatoVendas f
+JOIN Dimensional.DimensaoTempo t 
+    ON f.ChaveTempo = t.ChaveTempo
+GROUP BY t.Ano, t.Trimestre
+ORDER BY Faturamento DESC
+LIMIT 1;
+
+_Data output, PostgreSQL_
+
+<img width="285" height="58" alt="image" src="https://github.com/user-attachments/assets/4c881fb8-2533-4659-b183-b803154f55d0" />
 
 **Como se comportam as vendas por dia da semana?**
-
 
 Query: SELECT CASE
 WHEN t.DiaSemana=  0 THEN 'Domingo'
