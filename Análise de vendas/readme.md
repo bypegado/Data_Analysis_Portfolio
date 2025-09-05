@@ -23,8 +23,9 @@ Fato Vendas → registros de vendas com quantidade, valores e descontos
 
 A arquitectura das tabelas é em estrela aonde o relacionamento das tabelas dimensões com a tabela fato é do tipo 1:N em termos de cardinalidade, a seguir podemos visualizar o diagrama:
 
-<img width="736" height="602" alt="Image" src="https://github.com/user-attachments/assets/9733c3b1-d977-4a1a-8039-ae06817e5147" />
 
+
+<img width="736" height="602" alt="484002802-9733c3b1-d977-4a1a-8039-ae06817e5147" src="https://github.com/user-attachments/assets/ef704d61-97cd-4786-9a11-bcd7d40060aa" />
 
 
 ## Exploração de dados:
