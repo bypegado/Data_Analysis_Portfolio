@@ -273,14 +273,24 @@ _Data output, PostgreSQL_
 **Como se comportam as vendas por dia da semana?**
 
 
-Query: SELECT t.DiaSemana, SUM(f.ValorTotal) AS TotalVendas
+Query: SELECT CASE
+WHEN t.DiaSemana=  0 THEN 'Domingo'
+WHEN t.DiaSemana = 1 THEN 'Segunda-Feira'
+WHEN t.DiaSemana =2 THEN 'Terça-Feira'
+WHEN t.DiaSemana = 3 THEN 'Quarta-Feira'
+WHEN t.DiaSemana = 4 THEN 'Quinta-Feira'
+WHEN t.DiaSemana = 5 THEN 'Sexta-Feira'
+else 'Sabado'
+end as Dianasemana
+, SUM(f.ValorTotal) AS TotalVendas
 FROM Dimensional.FatoVendas f
 JOIN Dimensional.DimensaoTempo t ON f.ChaveTempo = t.ChaveTempo
 GROUP BY t.DiaSemana
-ORDER BY t.Diasemana;
+ORDER BY t.Diasemana ;
 
 _Data output, PostgreSQL_
 
-<img width="225" height="209" alt="image" src="https://github.com/user-attachments/assets/8690cedc-b8fa-4a6f-9ee8-787551763570" />
+<img width="237" height="216" alt="image" src="https://github.com/user-attachments/assets/50b5d371-e721-4b9a-b06f-224af8a992ac" />
+
 
 
