@@ -99,6 +99,10 @@ Classificação do nível de confiança do dispositivo.
 | 2 | Confiança média |
 | 3 | Alta confiança |
 
+### 📌 Diagrama - Modelo dimensional
+<img width="645" height="660" alt="image" src="https://github.com/user-attachments/assets/2d54f54d-6138-4d22-8f0d-149744a15b6f" />
+
+
 ---
 
 ## 🔄 ETL e Transformações
