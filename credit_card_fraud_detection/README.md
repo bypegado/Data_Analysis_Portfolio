@@ -17,7 +17,7 @@ O foco do projecto não é apenas a visualização de dados, mas sim a **estrutu
 ---
 
 ## 📥 Origem dos Dados
-Os dados utilizados neste projecto têm origem num **dataset público disponibilizado na plataforma :contentReference[oaicite:0]{index=0}**, utilizado exclusivamente para fins educacionais e de portfólio.
+Os dados utilizados neste projecto têm origem num **dataset público disponibilizado na plataforma Kaggle**, utilizado exclusivamente para fins educacionais e de portfólio.
 
 🔗 Fonte do dataset:  
 https://www.kaggle.com/code/elgohary249/credit-card-fraud-detection-dataset
@@ -45,7 +45,11 @@ Foi aplicada uma abordagem baseada em **boas práticas de Business Intelligence*
 
 ---
 
-## ⭐ Estrutura Final do Modelo de Dados
+## ⭐ Estrutura do Modelo de Dados
+
+### 📌 Tabela de origem
+<img width="199" height="310" alt="image" src="https://github.com/user-attachments/assets/33e97c1f-d02a-4b13-8838-73d92b7bf96c" />
+
 
 ### 📌 Tabela Fato
 
